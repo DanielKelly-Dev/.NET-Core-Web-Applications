@@ -1,0 +1,10 @@
+﻿@model StudentViewModel
+
+<h3>@Model.Title</h3>
+
+<ul>
+    @foreach (var student in Model.Students)
+    {
+        <li>@student</li>
+    }
+</ul>
