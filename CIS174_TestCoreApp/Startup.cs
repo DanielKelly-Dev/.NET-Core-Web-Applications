@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Identity;
+using CIS174_TestCoreApp.Entities;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using CIS174_TestCoreApp.Services;
 
 namespace CIS174_TestCoreApp
 {
@@ -35,6 +33,14 @@ namespace CIS174_TestCoreApp
             services.AddDbContext<PersonContext>();
             services.AddScoped<PersonContext>();
             services.AddScoped<PersonService>();
+
+            services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+                options.Password.RequiredLength = 10)
+                .AddEntityFrameworkStores<PersonContext>()
+                .AddDefaultTokenProviders();
+
+            services.AddTransient<Services.IEmailSender, AuthMessageSender>();
+            services.AddTransient<ISmsSender, AuthMessageSender>();
 
             services.AddMvc();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
@@ -62,7 +68,9 @@ namespace CIS174_TestCoreApp
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+            app.UseAuthentication();
 
+            app.UseMvc();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
