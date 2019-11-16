@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CIS174_TestCoreApp.Migrations
 {
     [DbContext(typeof(PersonContext))]
-    [Migration("20191114031647_DBEdits")]
-    partial class DBEdits
+    [Migration("20191116221732_InitialDBCreation")]
+    partial class InitialDBCreation
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

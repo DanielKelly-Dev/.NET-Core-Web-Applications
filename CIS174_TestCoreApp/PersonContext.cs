@@ -46,7 +46,8 @@ namespace CIS174_TestCoreApp
         public DbSet<Accomplishment> Accomplishments { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
-            => options.UseSqlServer(@"Server=tcp:cis174djkelly2.database.windows.net,1433;Initial Catalog=cis174db;Persist Security Info=False;User ID=cis174;Password=Daniel!@;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+            => options.UseSqlServer(@"Server=tcp:cis174djkelly2.database.windows.net,1433;Initial Catalog=cis174db;Persist Security Info=False;User ID=cis174;Password=Daniel1!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+
 
     }
 }
